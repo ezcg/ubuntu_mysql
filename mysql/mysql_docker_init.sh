@@ -5,7 +5,6 @@
 
 printf "\n\n===============================running mysql_docker_init.sh\n\n"
 
-microdnf install -y vim
 touch ~/.bashrc
 echo "alias ll='ls -ltra'" > ~/.bashrc
 echo "set statusline=%f
@@ -22,5 +21,7 @@ set syntax=php
 au BufRead,BufNewFile *.html,*.php,*.phtml,*.inc setfiletype php " > /root/.vimrc
 touch ~/done.txt
 echo "hi" > ~/done.txt
+
+printf "\n\nmysql_docker_init.sh done\n"
 
 

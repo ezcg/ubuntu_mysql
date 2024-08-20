@@ -28,7 +28,7 @@ printf "\n\n"
 
 docker exec -it db mysql -V
 
-printf "\m\mmysql Warnings in the logs\n\n"
+printf "\n\nmysql Warnings in the logs\n\n"
 docker logs db | grep Warning
 
 printf "\n\n"

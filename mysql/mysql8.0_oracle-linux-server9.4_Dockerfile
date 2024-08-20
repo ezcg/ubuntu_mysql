@@ -2,7 +2,13 @@ FROM mysql:8.0
 
 USER root
 
+RUN microdnf update -y
+RUN microdnf install -y iputils
+RUN microdnf install -y findutils
 RUN microdnf install -y vim
+RUN microdnf install -y lsof
+RUN microdnf install -y telnet
+RUN microdnf clean all
 
 RUN touch ~/.bashrc
 RUN echo "alias ll='ls -ltra'" > ~/.bashrc

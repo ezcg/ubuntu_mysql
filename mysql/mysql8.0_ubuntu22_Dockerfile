@@ -1,0 +1,35 @@
+FROM ubuntu:22.04
+
+# https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata-when-installing-certbot-in-a-docker-contai
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install the necessary dependencies
+RUN apt-get -y update && apt-get install -y \
+    vim \
+    net-tools \
+    curl \
+    wget \
+    build-essential \
+    lsof \
+    mysql-client \
+    python-is-python3 \
+    openssh-client \
+    composer \
+    sudo \
+    lsb-release \
+    ca-certificates \
+    apt-transport-https \
+    software-properties-common \
+    mysql-server-core-8.0 \
+    mysql-server-8.0
+
+
+# fix error when trying to start mysql
+# ERROR "warning: cannot change directory to /nonexistent: No such file or directory"
+# https://serverfault.com/questions/755763/mysql-nonexistent-home-vs-no-directory-logging-in-with-home/942422
+# "assign a home directory to the mysql user"
+RUN usermod -d /var/lib/mysql/ mysql
+
+#ERROR mysqld: File './binlog.index' not found (OS errno 13 - Permission denied)
+# https://stackoverflow.com/questions/52719378/failed-to-find-valid-data-directory-mysql-generic-binary-installion/65214867#65214867
+RUN mysqld --initialize
