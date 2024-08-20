@@ -1,0 +1,20 @@
+FROM mysql:8.0
+
+USER root
+
+RUN microdnf install -y vim
+
+RUN touch ~/.bashrc
+RUN echo "alias ll='ls -ltra'" > ~/.bashrc
+RUN echo -e 'set statusline=%f \n\
+set pastetoggle=<F2> \n\
+set smartcase \n\
+set number \n\
+set tabstop=4 \n\
+set shiftwidth=4 \n\
+set softtabstop=4 \n\
+set smartindent \n\
+set autoindent \n\
+hi apacheComment guifg=white \n\
+set syntax=php \n\
+au BufRead,BufNewFile *.html,*.php,*.phtml,*.inc setfiletype php' > /root/.vimrc
