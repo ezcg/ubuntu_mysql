@@ -1,0 +1,35 @@
+FROM php:8.2-fpm-alpine
+
+WORKDIR /var/www/app
+
+RUN apk update && apk add \
+    curl \
+    libpng-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    vim
+
+RUN docker-php-ext-install pdo pdo_mysql \
+    && apk --no-cache add nodejs npm
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+USER root
+
+RUN chmod 777 -R /var/www/app
+
+RUN touch ~/.bashrc
+RUN echo "alias ll='ls -ltra'" > ~/.bashrc
+RUN echo -e 'set statusline=%f \n\
+set pastetoggle=<F2> \n\
+set smartcase \n\
+set number \n\
+set tabstop=4 \n\
+set shiftwidth=4 \n\
+set softtabstop=4 \n\
+set smartindent \n\
+set autoindent \n\
+hi apacheComment guifg=white \n\
+set syntax=php \n\
+au BufRead,BufNewFile *.html,*.php,*.phtml,*.inc setfiletype php' > /root/.vimrc
