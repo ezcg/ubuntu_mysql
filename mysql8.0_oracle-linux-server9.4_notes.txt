@@ -1,0 +1,25 @@
+mysql8.0_oracle-linux-server9.4
+
+[Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+# https://stackoverflow.com/questions/17692663/how-can-i-change-the-path-of-pid-file-in-mysql-5-6
+# https://stackoverflow.com/questions/61970336/docker-compose-mysql-warning-insecure-configuration-for-pid-file
+
+[System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060, socket: /var/run/mysqld/mysqlx.sock
+# https://stackoverflow.com/questions/56720751/accidentally-expose-port
+
+mysql8.0_ubuntu22
+
+ERROR A START
+# fix error when trying to start mysql
+# ERROR "warning: cannot change directory to /nonexistent: No such file or directory"
+# https://serverfault.com/questions/755763/mysql-nonexistent-home-vs-no-directory-logging-in-with-home/942422
+# "assign a home directory to the mysql user"
+RUN usermod -d /var/lib/mysql/ mysql
+ERROR A END
+
+ERROR B START
+#ERROR mysqld: File './binlog.index' not found (OS errno 13 - Permission denied)
+# https://stackoverflow.com/questions/52719378/failed-to-find-valid-data-directory-mysql-generic-binary-installion/65214867#65214867
+mysqld --initialize
+ERROR B END
+

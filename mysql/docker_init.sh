@@ -19,8 +19,6 @@ set autoindent
 hi apacheComment guifg=white
 set syntax=php
 au BufRead,BufNewFile *.html,*.php,*.phtml,*.inc setfiletype php " > /root/.vimrc
-touch ~/done.txt
-echo "hi" > ~/done.txt
 
 printf "\n\nmysql_docker_init.sh done\n"
 

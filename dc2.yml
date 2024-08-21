@@ -12,8 +12,5 @@ services:
       - ./mysql/dbdata:/var/lib/mysql
       - ./mysql:/mysql
     environment:
-      MYSQL_DATABASE: laravel_docker
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
       MYSQL_ROOT_PASSWORD: root
-    command: sh -c "bash /mysql/mysql_docker_init.sh && tail -f /dev/null"
+    command: sh -c "bash /mysql/docker_init.sh && bash /mysql/mysql8.0_initialize.sh && tail -f /dev/null"

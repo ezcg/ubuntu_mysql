@@ -30,6 +30,4 @@ RUN apt-get -y update && apt-get install -y \
 # "assign a home directory to the mysql user"
 RUN usermod -d /var/lib/mysql/ mysql
 
-#ERROR mysqld: File './binlog.index' not found (OS errno 13 - Permission denied)
-# https://stackoverflow.com/questions/52719378/failed-to-find-valid-data-directory-mysql-generic-binary-installion/65214867#65214867
-RUN mysqld --initialize
+

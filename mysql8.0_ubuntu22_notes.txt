@@ -1,0 +1,100 @@
+ERROR C START
+mysql -u root -p
+Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+https://stackoverflow.com/questions/40149880/docker-mysql-root-password-do-not-work
+
+from the /var/logs/mysql/error.log:
+root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+[Server] A temporary password is generated for root@localhost: %gdMNowvS9n5
+
+mysql -uroot -p%gdMNowvS9n5
+
+general user using below command to change the password
+ALTER USER 'userName'@'localhost' IDENTIFIED BY 'New-Password-Here';
+
+mysql> select * from mysql.user where user='root'\G
+*************************** 1. row ***************************
+                    Host: localhost
+                    User: root
+             Select_priv: Y
+             Insert_priv: Y
+             Update_priv: Y
+             Delete_priv: Y
+             Create_priv: Y
+               Drop_priv: Y
+             Reload_priv: Y
+           Shutdown_priv: Y
+            Process_priv: Y
+               File_priv: Y
+              Grant_priv: Y
+         References_priv: Y
+              Index_priv: Y
+              Alter_priv: Y
+            Show_db_priv: Y
+              Super_priv: Y
+   Create_tmp_table_priv: Y
+        Lock_tables_priv: Y
+            Execute_priv: Y
+         Repl_slave_priv: Y
+        Repl_client_priv: Y
+        Create_view_priv: Y
+          Show_view_priv: Y
+     Create_routine_priv: Y
+      Alter_routine_priv: Y
+        Create_user_priv: Y
+              Event_priv: Y
+            Trigger_priv: Y
+  Create_tablespace_priv: Y
+                ssl_type:
+              ssl_cipher: 0x
+             x509_issuer: 0x
+            x509_subject: 0x
+           max_questions: 0
+             max_updates: 0
+         max_connections: 0
+    max_user_connections: 0
+                  plugin: caching_sha2_password
+3fwH`Ps=5E6asyO/.OtROkw8VgMshNIbMc7EoHsgG5LNaPVruLnz9
+        password_expired: N
+   password_last_changed: 2024-08-21 20:41:08
+       password_lifetime: NULL
+          account_locked: N
+        Create_role_priv: Y
+          Drop_role_priv: Y
+  Password_reuse_history: NULL
+     Password_reuse_time: NULL
+Password_require_current: NULL
+         User_attributes: NULL
+1 row in set (0.00 sec)
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+
+mysql -uroot -proot
+now works
+
+ERROR C END
+
+ERROR D START
+service mysql status
+mysqladmin: connect to server at 'localhost' failed
+error: 'Access denied for user 'debian-sys-maint'@'localhost' (using password: YES)'
+mysql> select * from mysql.user where user='debian-sys-maint'\G
+Empty set (0.00 sec)
+
+Get password of debian-sys-maint from /etc/mysql/debian.cnf
+mysql> CREATE USER 'debian-sys-maint'@'localhost' IDENTIFIED BY 'password_from_debian.cnf'
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'debian-sys-maint'@'localhost' WITH GRANT OPTION;
+mysql> FLUSH PRIVILEGES;
+mysql> exit
+service mysql status
+...snip...
+Server version		8.0.39-0ubuntu0.22.04.1
+Protocol version	10
+Connection		Localhost via UNIX socket
+UNIX socket		/var/run/mysqld/mysqld.sock
+Uptime:			56 min 9 sec
+...snip...
+
+ERROR D END
+

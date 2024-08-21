@@ -1,0 +1,14 @@
+rebuild and rerun dc1.yml
+does it create user named 'user' in mysql?
+does it create database 'laravel_docker'?
+does it need to run mysql/mysql8.0_initialize.sh? If not, rename mysql8.0_initialize.sh
+
+does MYSQL_ROOT_PASSWORD=root work in dc yml?
+
+delete all images and build each again, deleting all images in between each build
+
+run ubuntu24_mysql
+
+
+
+

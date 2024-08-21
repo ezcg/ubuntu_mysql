@@ -16,4 +16,4 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: user
       MYSQL_ROOT_PASSWORD: root
-    command: sh -c "bash /mysql/mysql_docker_init.sh && bash /mysql/mysql8.0_9.4_docker_init.sh && tail -f /dev/null"
+    command: sh -c "bash /mysql/docker_init.sh && bash /mysql/mysql8.0_oracle-linux-server9.4_docker_init.sh && tail -f /dev/null"
