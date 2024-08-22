@@ -1,0 +1,37 @@
+FROM ubuntu:24.04
+
+#ubuntu24 adds user 'ubuntu' with uid 1000, uid 1000 is what docker uses and setting user 'ubuntu' messes things up
+# https://askubuntu.com/questions/1513927/ubuntu-24-04-docker-images-now-includes-user-ubuntu-with-uid-gid-1000
+RUN touch /var/mail/ubuntu && chown ubuntu /var/mail/ubuntu && userdel -r ubuntu
+
+# https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata-when-installing-certbot-in-a-docker-contai
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install the necessary dependencies
+RUN apt-get -y update && apt-get install -y \
+    vim \
+    net-tools \
+    curl \
+    wget \
+    build-essential \
+    lsof \
+    mysql-client \
+    python-is-python3 \
+    openssh-client \
+    composer \
+    sudo \
+    lsb-release \
+    ca-certificates \
+    apt-transport-https \
+    software-properties-common \
+    mysql-server-core-8.0 \
+    mysql-server-8.0
+
+
+# fix error when trying to start mysql
+# ERROR "warning: cannot change directory to /nonexistent: No such file or directory"
+# https://serverfault.com/questions/755763/mysql-nonexistent-home-vs-no-directory-logging-in-with-home/942422
+# "assign a home directory to the mysql user"
+RUN usermod -d /var/lib/mysql/ mysql
+
+

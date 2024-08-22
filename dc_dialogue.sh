@@ -4,7 +4,7 @@ if [ -z "${num}" ]; then
 	printf "\n\nPossible projects:\n"
 	printf "1 mysql8.0_oracle-linux-server9.4_Dockerfile\n"
 	printf "2 mysql8.0_ubuntu22_Dockerfile\n"
-	printf "3 slimandbusty\n"
+	printf "3 mysql8.0_ubuntu24_Dockerfile\n"
 	printf "4 atheistdogs\n"
 	read -p "Type number of project and hit enter:" num
 fi
@@ -15,7 +15,7 @@ if [[ "$num" == 1 ]]; then
 elif [[ "$num" == 2 ]]; then
   project="2"
 elif [[ "$num" == 3 ]]; then
-  project="slimandbusty"
+  project="3"
 elif [[ "$num" == 4 ]]; then
   project="atheistdogs"
 else

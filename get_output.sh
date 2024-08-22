@@ -1,3 +1,5 @@
+#!/bin/bash
+
 printf "\n\nmysql version running in container 'db':\n\n"
 
 docker exec -it db mysql -V

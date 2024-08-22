@@ -1,3 +1,7 @@
+https://askubuntu.com/questions/1513927/ubuntu-24-04-docker-images-now-includes-user-ubuntu-with-uid-gid-1000
+
+same as ubuntu22:
+
 ERROR C START
 mysql -u root -p
 Enter password:
@@ -96,4 +100,3 @@ Uptime:			56 min 9 sec
 ...snip...
 
 ERROR D END
-

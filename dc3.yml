@@ -1,0 +1,16 @@
+services:
+
+  db:
+    build:
+      context: "mysql"
+      dockerfile: mysql8.0_ubuntu24_Dockerfile
+    container_name: db
+    tty: true
+    ports:
+      - "4306:3306"
+    volumes:
+      - ./mysql/dbdata:/var/lib/mysql
+      - ./mysql:/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    command: sh -c "bash /mysql/docker_init.sh && bash /mysql/mysql8.0_initialize.sh && tail -f /dev/null"

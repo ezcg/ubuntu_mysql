@@ -1,3 +1,5 @@
+#!/bin/bash
+
 . dc_dialogue.sh
 
 printf "\n\n"

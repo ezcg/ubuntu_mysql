@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#this is needed at build by ubuntu22 and ubuntu24
+
 numFiles=$(ls -1q /mysql/dbdata | wc -l)
 printf "\nnum files found in /mysql/dbdata: ${numFiles}"
 
