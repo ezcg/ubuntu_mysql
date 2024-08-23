@@ -3,12 +3,47 @@ does it create user named 'user' in mysql?
 does it create database 'laravel_docker'?
 does it need to run mysql/mysql8.0_initialize.sh? If not, rename mysql8.0_initialize.sh
 
+for docker images: how does dc decide repository, tag
+
 does MYSQL_ROOT_PASSWORD=root work in dc yml?
 
 delete all images and build each again, deleting all images in between each build
 
-run ubuntu24_mysql
+build ubuntu24_mysql
+
+[Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+That is just a warning printed by during database file initialization (mysqld --initialize-insecure). The root user with password is created later while the database is listening only on the unix socket.
+From https://github.com/docker-library/mysql/issues/307#issuecomment-313784886
+
+[Server] Insecure configuration for --pid-file: Location '/tmp' in the path is accessible to all OS users. Consider choosing a different directory.
+
+[System] [MY-013576] [InnoDB] InnoDB initialization has started.
+ 29 2024-08-22T18:49:16.961712Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+ 30 2024-08-22T18:49:17.057748Z 0 [System] [MY-010229] [Server] Starting XA crash recovery...
+ 31 2024-08-22T18:49:17.066956Z 0 [System] [MY-010232] [Server] XA crash recovery finished.
+
+[Server] X Plugin ready for connections. Bind-address: '127.0.0.1' port: 33060, socket: /var/run/mysqld/mysqlx.sock
 
 
+[InnoDB] InnoDB initialization has ended.
+ 28 2024-08-22T19:15:46.004932Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@    localhost: qoq=usjW)2i%
+
+666 #6 29.86 /usr/lib/tmpfiles.d/systemd-network.conf:10: Failed to resolve user 'systemd-network': No s     uch process^M^M
+ 667 #6 29.86 /usr/lib/tmpfiles.d/systemd-network.conf:11: Failed to resolve user 'systemd-network': No s     uch process^M^M
+ 668 #6 29.86 /usr/lib/tmpfiles.d/systemd-network.conf:12: Failed to resolve user 'systemd-network': No s     uch process^M^M
+ 669 #6 29.86 /usr/lib/tmpfiles.d/systemd-network.conf:13: Failed to resolve user 'systemd-network': No s     uch process^M^M
+ 670 #6 29.86 /usr/lib/tmpfiles.d/systemd.conf:22: Failed to resolve group 'systemd-journal': No such pro     cess^M^M
+ 671 #6 29.86 /usr/lib/tmpfiles.d/systemd.conf:23: Failed to resolve group 'systemd-journal': No such pro     cess^M^M
+ 672 #6 29.86 /usr/lib/tmpfiles.d/systemd.conf:28: Failed to resolve group 'systemd-journal': No such pro     cess^M^M
+ 673 #6 29.86 /usr/lib/tmpfiles.d/systemd.conf:29: Failed to resolve group 'systemd-journal': No such pro     cess^M^M
+ 674 #6 29.86 /usr/lib/tmpfiles.d/systemd.conf:30: Failed to resolve group 'systemd-journal': No such pro     cess^M^M
+ 675 #6 29.87 Creating group 'systemd-journal' with GID 999.^M^M
+
+ #6 31.73 Setting up mysql-common (5.8+1.1.0build1) ...^M
+ #6 31.75 update-alternatives: using /etc/mysql/my.cnf.fallback to provide /etc/mysql/my.cnf (my.cnf)      in auto mode^M
+
+[Warning] [MY-013360] [Server] Plugin sha256_password reported: ''sha2    56_password' is deprecated and will be removed in a future release. Please use caching_sha2_password     instead'
+
+[Warning] [MY-013360] [Server] Plugin mysql_native_password reported: '    'mysql_native_password' is deprecated and will be removed in a future release. Please use caching_sha    2_password instead'
 
 

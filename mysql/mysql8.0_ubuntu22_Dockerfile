@@ -9,6 +9,7 @@ RUN apt-get -y update && apt-get install -y \
     net-tools \
     curl \
     wget \
+    telnet \
     build-essential \
     lsof \
     mysql-client \

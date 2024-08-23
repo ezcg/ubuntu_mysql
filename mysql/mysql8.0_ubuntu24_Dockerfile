@@ -12,6 +12,7 @@ RUN apt-get -y update && apt-get install -y \
     vim \
     net-tools \
     curl \
+    telnet \
     wget \
     build-essential \
     lsof \
@@ -33,5 +34,10 @@ RUN apt-get -y update && apt-get install -y \
 # https://serverfault.com/questions/755763/mysql-nonexistent-home-vs-no-directory-logging-in-with-home/942422
 # "assign a home directory to the mysql user"
 RUN usermod -d /var/lib/mysql/ mysql
+
+#this caused the docker to not start, so moved it to mysql8.0_initialize.sh
+#https://www.google.com/search?q=docker+compose+only+execute+%22command%22+if+up+not+build&oq=docker+compose+only+execute+%22command%22+if+up+not+build&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRirAjIHCAUQIRirAtIBCTExMTE4ajBqNKgCALACAQ&sourceid=chrome&ie=UTF-8
+#ENTRYPOINT ["/bin/bash", "-c", "if [ ! -f /is_initialized ]; then touch /is_initialized && mysqld --initialize --user=mysql; fi;"]
+
 
 

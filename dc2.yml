@@ -13,4 +13,4 @@ services:
       - ./mysql:/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-    command: sh -c "bash /mysql/docker_init.sh && bash /mysql/mysql8.0_initialize.sh && tail -f /dev/null"
+    command: sh -c "bash /mysql/docker_init.sh && bash /mysql/mysql8.0_initialize.sh && bash /mysql/mysql8.0_start.sh && tail -f /dev/null"
