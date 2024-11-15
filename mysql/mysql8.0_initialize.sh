@@ -11,7 +11,9 @@ if [ "${numFiles}" -lt 1 ]; then
   printf "\nNot finding any files in mysql/dbdata \n"
 fi
 if [ ! -f /is_initialized ]; then
-  printf "\nmysql has not been initialized, so initializing it...\n\n"
+  printf "\n /is_initialized was NOT found so mysql considered not initialized, so initializing it...\n\n"
   touch /is_initialized
   mysqld --initialize --user=mysql;
+else
+  printf "\nthe file /is_initialized was found so mysql considered initialized, so NOT initializing it...\n\n"
 fi;

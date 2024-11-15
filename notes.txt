@@ -11,7 +11,7 @@ https://stackoverflow.com/questions/40149880/docker-mysql-root-password-do-not-w
 https://github.com/docker-library/mysql/issues/180
 Are you mapping to an existing database or creating a new one?
 The root password variable will only be used when creating a database. It won't change the root password of an existing one.
-Creation of databases also only happens in there's no existing datadir. Did you map a volume containing an existing MySQL database when starting up the container?
+Creation of databases also only happens if there's no existing datadir. Did you map a volume containing an existing MySQL database when starting up the container?
 Important to note that the image entrypoint script will never make changes to an existing database.
 If you mount an existing data directory into var/lib/mysql, options like MYSQL_ROOT_PASSWORD will have no effect
 

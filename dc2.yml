@@ -4,7 +4,7 @@ services:
     build:
       context: "mysql"
       dockerfile: mysql8.0_ubuntu22_Dockerfile
-    container_name: db
+    container_name: dbmysql8_u22
     tty: true
     ports:
       - "4306:3306"
@@ -12,5 +12,7 @@ services:
       - ./mysql/dbdata:/var/lib/mysql
       - ./mysql:/mysql
     environment:
+      MYSQL_DATABASE: docker
+      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
     command: sh -c "bash /mysql/docker_init.sh && bash /mysql/mysql8.0_initialize.sh && bash /mysql/mysql8.0_start.sh && tail -f /dev/null"
